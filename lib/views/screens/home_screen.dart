@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const SafeArea(child: HomeBody()),
-    SearchPage(),
     const SafeArea(child: ProfileScreen()),
   ];
 
@@ -70,14 +69,12 @@ class HomeBody extends ConsumerWidget {
                   WeatherDetails(data: data),
                   20.heightBox,
                   const HourlyForecast(),
-                  const Next7DaysSection(),
+                   Next7DaysSection(),
                 ],
               );
             },
-            loading: () => const Center(
-                child: CircularProgressIndicator()),
-            error: (error, stackTrace) =>
-                Center(child: Text('Error: $error')),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stackTrace) => Center(child: Text('Error: $error')),
           ),
         ],
       ),
@@ -213,7 +210,8 @@ class HourlyForecast extends ConsumerWidget {
                     ),
                     child: Column(
                       children: [
-                        Text("${hourData.dt!} AM", style: const TextStyle(color: Vx.gray600)),
+                        Text("${hourData.dt!} AM",
+                            style: const TextStyle(color: Vx.gray600)),
                         Image.asset(
                           AppAssets.clouds,
                           width: 80,
@@ -242,27 +240,100 @@ class HourlyForecast extends ConsumerWidget {
 }
 
 class Next7DaysSection extends StatelessWidget {
-  const Next7DaysSection({super.key});
+   Next7DaysSection({super.key});
+
+  final List<Map<String, String>> next7Days = [
+    {"day": "Mon", "temp": "28°C", "condition": "Sunny"},
+    {"day": "Tue", "temp": "30°C", "condition": "Cloudy"},
+    {"day": "Wed", "temp": "27°C", "condition": "Rainy"},
+    {"day": "Thu", "temp": "25°C", "condition": "Sunny"},
+    {"day": "Fri", "temp": "29°C", "condition": "Windy"},
+    {"day": "Sat", "temp": "32°C", "condition": "Cloudy"},
+    {"day": "Sun", "temp": "26°C", "condition": "Clear"},
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Semantics(
-          label: 'Title for the next 7 days forecast section',
-          child: context
-              .translate(AppString.nextDays)
-              .text
-              .semiBold
-              .size(16)
-              .make(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Semantics(
+              label: 'Title for the next 7 days forecast section',
+              child: "Next 7 Days"
+                  .text
+                  .semiBold
+                  .size(16)
+                  .make(),
+            ),
+            Semantics(
+              label: 'Button to view all 7 day forecast',
+              child: TextButton(
+                onPressed: () {},
+                child: "View All".text.make(),
+              ),
+            ),
+          ],
         ),
-        Semantics(
-          label: 'Button to view all 7 day forecast',
-          child: TextButton(
-            onPressed: () {},
-            child: "View All".text.make(),
+        10.heightBox,
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: next7Days.length,
+            itemBuilder: (context, index) {
+              var dayData = next7Days[index];
+              return Semantics(
+                label: 'Weather for ${dayData["day"]}',
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[50],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          dayData["day"]!,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        const Icon(
+                          Icons.wb_sunny,
+                          size: 40,
+                          color: Colors.orange,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          dayData["temp"]!,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          dayData["condition"]!,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ],
