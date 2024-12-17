@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const cardColor = Color(0xff57A0ED);
 
  //Dark Theme
   static const primaryColor=Color(0xff242A32);

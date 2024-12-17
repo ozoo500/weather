@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD6QR_wcqqZUNl-XUMlV678qbiRdAjt3aw',
-    appId: '1:511668633125:android:9c9ef11f094edcface89cc',
+    appId: '1:511668633125:android:16bc67ec8bbcc812ce89cc',
     messagingSenderId: '511668633125',
     projectId: 'weather-8a55e',
     storageBucket: 'weather-8a55e.firebasestorage.app',
@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '511668633125',
     projectId: 'weather-8a55e',
     storageBucket: 'weather-8a55e.firebasestorage.app',
+    iosClientId: '511668633125-3ffa1nsi0pkjr64ol400g7bfq1cengjk.apps.googleusercontent.com',
     iosBundleId: 'com.example.weatherApp',
   );
 
@@ -72,6 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '511668633125',
     projectId: 'weather-8a55e',
     storageBucket: 'weather-8a55e.firebasestorage.app',
+    iosClientId: '511668633125-3ffa1nsi0pkjr64ol400g7bfq1cengjk.apps.googleusercontent.com',
     iosBundleId: 'com.example.weatherApp',
   );
 
@@ -83,4 +85,5 @@ class DefaultFirebaseOptions {
     authDomain: 'weather-8a55e.firebaseapp.com',
     storageBucket: 'weather-8a55e.firebasestorage.app',
   );
+
 }

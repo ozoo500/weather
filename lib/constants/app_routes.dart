@@ -6,7 +6,6 @@ import '../views/screens/home_screen.dart';
 import '../views/screens/login_Screen.dart';
 import '../views/screens/splash_screen.dart';
 
-
 class Routes {
   static const String splashRoute = '/';
   static const String homeRoute = '/home';
@@ -49,7 +48,7 @@ class Routes {
                 TextDirection.ltr,
               );
             });
-            return const HomeScreen();
+            return  HomeScreen();
           },
         );
 
@@ -57,7 +56,6 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) => const SignUpScreen(),
         );
-
 
       default:
         return MaterialPageRoute(
@@ -68,7 +66,7 @@ class Routes {
                 TextDirection.ltr,
               );
             });
-            return const HomeScreen();
+            return  HomeScreen();
           },
         );
     }

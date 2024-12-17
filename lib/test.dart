@@ -1,0 +1,11 @@
+/*
+
+permission for net
+ui
+integrate with api
+responsive
+semantics
+download permmission
+push notification
+
+ */

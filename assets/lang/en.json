@@ -1,25 +1,15 @@
 {
-  "homeView" : "What do you want to watch?",
-  "search" :"Search",
-  "home":"Home",
-  "watchList" :"Watch list",
-  "Details": "Details",
+  "Search" :"Search",
   "signUp": "SignUp",
   "signIn": "SignIn",
   "haveAnAccount": "Already have an account? Log in",
   "noAccount": "Don't have an account? Sign up",
-  "searchInfoToolTip": "search by Movie Title or Genre Name",
-  "Download":"Download",
-  "About Movie" :"About Movie",
-  "Review":"Review",
-  "Cast":"Cast",
-  "WhatDoYouWantToWatch": "What do you want to watch?",
-  "Upcoming":"Upcoming",
-  "TopRated": "Top Rated",
-  "Popular": "Popular",
-  "profile": "profile",
+  "Profile": "profile",
   "update":"update",
   "password":"please enter your password",
    "email":"please enter your email",
-   "confirmPassword":"please confirm your password"
+   "confirmPassword":"please confirm your password",
+   "Home": "Home",
+  "nextDays": "next7Days"
+
 }

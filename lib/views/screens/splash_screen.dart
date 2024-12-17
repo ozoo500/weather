@@ -18,13 +18,12 @@ class SplashScreen extends ConsumerWidget {
         data: (user) {
           Future.delayed(const Duration(seconds: 2), () {
             if (user != null) {
-              if(context.mounted){
+              if (context.mounted) {
                 Navigator.pushReplacementNamed(context, Routes.homeRoute);
               }
             } else {
-              if(context.mounted){
+              if (context.mounted) {
                 Navigator.pushReplacementNamed(context, Routes.loginRoute);
-
               }
             }
           });
@@ -33,7 +32,7 @@ class SplashScreen extends ConsumerWidget {
             child: Semantics(
               label: "Splash Image weather",
               child: Image.asset(
-                AppAssets.splashImage,
+                AppAssets.clouds,
                 width: 189,
                 height: 189,
                 fit: BoxFit.cover,
