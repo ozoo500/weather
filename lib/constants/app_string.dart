@@ -14,5 +14,11 @@ class AppString {
   static const email = "email";
   static const confirmPassword = "confirmPassword";
   static const nextDays = "nextDays";
+  static const signInWithGoogle = "signInWithGoogle";
+  static const Submit = "Submit";
+  static const Cancel = "Cancel";
+  static const Email = "Email";
+  static const Whats = "Whats";
+  static const Phone = "Phone";
 
 }

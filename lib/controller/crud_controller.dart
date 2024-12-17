@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Crud {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -71,3 +72,7 @@ class Crud {
     }
   }
 }
+
+final authCrudProvider = Provider<Crud>((ref) {
+  return Crud();
+});

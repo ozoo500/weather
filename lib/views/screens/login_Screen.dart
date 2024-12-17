@@ -18,6 +18,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _isGoogleSignInLoading = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -92,8 +93,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-
                 loading
                     ? const CircularProgressIndicator()
                     : CustomElevatedButton(
@@ -129,6 +128,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     return;
                                   }
                                   if (context.mounted) {
+                                    ref.refresh(userDataProvider);
+
                                     Navigator.pushReplacementNamed(
                                       context,
                                       Routes.homeRoute,
@@ -136,6 +137,39 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   }
                                 }
                               },
+                        backgroundColor:
+                            theme.bottomNavigationBarTheme.selectedItemColor!,
+                      ),
+                const SizedBox(height: 10),
+                _isGoogleSignInLoading
+                    ? const CircularProgressIndicator()
+                    : CustomElevatedButton(
+                        text: context.translate(AppString.signInWithGoogle),
+                        onPressed: () async {
+                          setState(() {
+                            _isGoogleSignInLoading = true;
+                          });
+
+                          final googleSignInResult = await ref
+                              .read(authServiceProvider)
+                              .signInWithGoogle();
+
+                          setState(() {
+                            _isGoogleSignInLoading = false;
+                          });
+
+                          if (context.mounted) {
+                            _showSnackBar(context, 'Google sign-in successful',
+                                Colors.green);
+                            Navigator.pushReplacementNamed(
+                                context, Routes.homeRoute);
+                          } else {
+                            if (context.mounted) {
+                              _showSnackBar(
+                                  context, 'An error occurred', Colors.red);
+                            }
+                          }
+                        },
                         backgroundColor:
                             theme.bottomNavigationBarTheme.selectedItemColor!,
                       ),

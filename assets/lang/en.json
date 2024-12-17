@@ -10,6 +10,12 @@
    "email":"please enter your email",
    "confirmPassword":"please confirm your password",
    "Home": "Home",
-  "nextDays": "next7Days"
+  "nextDays": "next7Days",
+  "signInWithGoogle": "Continue with Google",
+  "Submit": "Submit",
+  "Cancel": "Cancel",
+  "Email": "Email",
+  "Phone": "Phone",
+  "Whats": "Whats"
 
 }
