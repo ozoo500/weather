@@ -67,7 +67,7 @@ class HomeBody extends ConsumerWidget {
                 children: [
                   CurrentWeatherInfo(data: data),
                   10.heightBox,
-                  const WeatherDetails(),
+                   WeatherDetails(data:data),
                   20.heightBox,
                   const HourlyForecast(),
                   const Next7DaysSection(),
@@ -146,7 +146,8 @@ class CurrentWeatherInfo extends StatelessWidget {
 }
 
 class WeatherDetails extends StatelessWidget {
-  const WeatherDetails({super.key});
+  const WeatherDetails({super.key, required this.data});
+  final CurrentWeatherData data;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +159,7 @@ class WeatherDetails extends StatelessWidget {
           AppAssets.humidity,
           AppAssets.windSpeed
         ];
-        var values = ["70%", "40%", "3.5km/h"];
+        var values = [data.clouds!.all, data.main!.humidity, data.wind!.speed];
         return Column(
           children: [
             Semantics(
@@ -172,7 +173,7 @@ class WeatherDetails extends StatelessWidget {
             10.heightBox,
             Semantics(
               label: 'Percentage or value displayed for weather condition',
-              child: values[index].text.gray400.make(),
+              child: values[index]!.text.gray400.make(),
             ),
           ],
         );
