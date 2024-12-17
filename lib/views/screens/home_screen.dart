@@ -67,7 +67,7 @@ class HomeBody extends ConsumerWidget {
                 children: [
                   CurrentWeatherInfo(data: data),
                   10.heightBox,
-                   WeatherDetails(data:data),
+                  WeatherDetails(data: data),
                   20.heightBox,
                   const HourlyForecast(),
                   const Next7DaysSection(),
@@ -75,9 +75,9 @@ class HomeBody extends ConsumerWidget {
               );
             },
             loading: () => const Center(
-                child: CircularProgressIndicator()), // Loading state
+                child: CircularProgressIndicator()),
             error: (error, stackTrace) =>
-                Center(child: Text('Error: $error')), // Error state
+                Center(child: Text('Error: $error')),
           ),
         ],
       ),
@@ -182,41 +182,58 @@ class WeatherDetails extends StatelessWidget {
   }
 }
 
-class HourlyForecast extends StatelessWidget {
+class HourlyForecast extends ConsumerWidget {
   const HourlyForecast({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final hourlyWeather = ref.watch(hourlyProvider);
+
     return Semantics(
       label: 'A horizontal list displaying forecast for upcoming hours',
       child: SizedBox(
         height: 150,
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return Semantics(
-              label: 'Hourly weather forecast for hour ${index + 1}',
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                margin: const EdgeInsets.only(right: 4),
-                decoration: BoxDecoration(
-                    color: AppColors.cardColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: Column(
-                  children: [
-                    "${index + 1} AM".text.gray600.make(),
-                    Image.asset(
-                      AppAssets.clouds,
-                      width: 80,
+        child: hourlyWeather.when(
+          data: (data) {
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: data.list!.length,
+              itemBuilder: (context, index) {
+                final hourData = data.list![index];
+                return Semantics(
+                  label: 'Hourly weather forecast for hour ${index + 1}',
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.only(right: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.cardColor,
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    "38${AppString.degree} ".text.white.make(),
-                  ],
-                ),
-              ),
+                    child: Column(
+                      children: [
+                        Text("${hourData.dt!} AM", style: const TextStyle(color: Vx.gray600)),
+                        Image.asset(
+                          AppAssets.clouds,
+                          width: 80,
+                        ),
+                        Text(
+                          "${hourData.main!.temp}°",
+                          style: const TextStyle(color: Vx.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             );
+          },
+          loading: () {
+            return const Center(child: CircularProgressIndicator());
+          },
+          error: (error, stack) {
+            return Center(child: Text('Failed to load hourly data: $error'));
           },
         ),
       ),
