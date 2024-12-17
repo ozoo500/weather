@@ -212,7 +212,7 @@ class HourlyForecast extends ConsumerWidget {
                     ),
                     child: Column(
                       children: [
-                        Text("${hourData.dt!} AM",
+                        Text("${index+1} AM",
                             style: const TextStyle(color: Vx.gray600)),
                         Image.asset(
                           AppAssets.clouds,

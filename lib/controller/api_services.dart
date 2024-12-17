@@ -12,15 +12,14 @@ const String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 const String currentEndpoint =
     "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=$apiKey";
 
-
 final weatherProvider =
     FutureProvider.autoDispose<CurrentWeatherData>((ref) async {
-      final position = await getUserLocation();
-      if (position == null) {
-        throw Exception("Failed to get user location");
-      }
-      final lat = position.latitude.toString();
-      final lon = position.longitude.toString();
+  final position = await getUserLocation();
+  if (position == null) {
+    throw Exception("Failed to get user location");
+  }
+  final lat = position.latitude.toString();
+  final lon = position.longitude.toString();
   final response =
       await http.get(Uri.parse("$baseUrl?lat=$lat&lon=$lon&appid=$apiKey"));
 
@@ -35,13 +34,13 @@ final weatherProvider =
 
 final hourlyProvider =
     FutureProvider.autoDispose<HourlyWeatherData>((ref) async {
-      final position = await getUserLocation();
-      if (position == null) {
-        throw Exception("Failed to get user location");
-      }
-      final lat = position.latitude.toString();
-      final lon = position.longitude.toString();
-      final response = await http.get(Uri.parse(
+  final position = await getUserLocation();
+  if (position == null) {
+    throw Exception("Failed to get user location");
+  }
+  final lat = position.latitude.toString();
+  final lon = position.longitude.toString();
+  final response = await http.get(Uri.parse(
       "https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey"));
 
   if (response.statusCode == 200) {
@@ -80,5 +79,3 @@ Future<Position?> getUserLocation() async {
 final locationProvider = FutureProvider<Position?>((ref) async {
   return await getUserLocation();
 });
-
-
