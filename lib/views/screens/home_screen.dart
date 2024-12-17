@@ -58,12 +58,13 @@ class HomeBody extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           20.heightBox,
-          const CityNameHeader(),
-          10.heightBox,
+
           weatherData.when(
             data: (data) {
               return Column(
                 children: [
+                   CityNameHeader(data:data),
+                  10.heightBox,
                   CurrentWeatherInfo(data: data),
                   10.heightBox,
                   WeatherDetails(data: data),
@@ -83,13 +84,14 @@ class HomeBody extends ConsumerWidget {
 }
 
 class CityNameHeader extends StatelessWidget {
-  const CityNameHeader({super.key});
+  const CityNameHeader({super.key, required this.data});
+  final CurrentWeatherData data;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
       label: 'City name displayed at the top',
-      child: "cityname"
+      child: "${data.name}"
           .text
           .fontFamily("Poppins")
           .size(32)

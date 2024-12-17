@@ -51,6 +51,7 @@ dependencies:
   url_launcher:
   google_sign_in:
   velocity_x:
+  geolocator:
 
   flutter_localizations:
     sdk: flutter
