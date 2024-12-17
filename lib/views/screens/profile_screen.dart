@@ -62,7 +62,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     if (userData == null) {
                       return const Text("No user data found.");
                     }
-
                     final userName = userData['name'] ?? 'User';
                     final userEmail =
                         userData['email'] ?? 'Email not available';
@@ -215,36 +214,47 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: CustomElevatedButton(
-                          text: context.translate(AppString.Email),
-                          onPressed: () async {
-                            await launchMethod('mailto:omareid720@gmail.com');
-                          },
-                          backgroundColor: Colors.blue,
+                        child: SizedBox(
+                          width: screenWidth * .40,
+
+                          child: CustomElevatedButton(
+                            text: context.translate(AppString.Email),
+                            onPressed: () async {
+                              await launchMethod('mailto:omareid720@gmail.com');
+                            },
+                            backgroundColor: Colors.blue,
+                          ),
                         ),
                       ),
                       const SizedBox(
                         width: 4,
                       ),
                       Expanded(
-                        child: CustomElevatedButton(
-                          text: context.translate(AppString.Phone),
-                          onPressed: () async {
-                            await launchMethod('tel:01554928896');
-                          },
-                          backgroundColor: Colors.blue,
+                        child: SizedBox(
+                          width: screenWidth * .40,
+                          child: CustomElevatedButton(
+                            text: context.translate(AppString.Phone),
+                            onPressed: () async {
+                              await launchMethod('tel:01554928896');
+                            },
+                            backgroundColor: Colors.blue,
+                          ),
                         ),
                       ),
                       const SizedBox(
                         width: 4,
                       ),
                       Expanded(
-                        child: CustomElevatedButton(
-                          text: context.translate(AppString.Whats),
-                          onPressed: () async {
-                            await launchMethod('https://wa.me/01554928896');
-                          },
-                          backgroundColor: Colors.blue,
+                        child: SizedBox(
+                          width: screenWidth * .30,
+
+                          child: CustomElevatedButton(
+                            text: context.translate(AppString.Whats),
+                            onPressed: () async {
+                              await launchMethod('https://wa.me/01554928896');
+                            },
+                            backgroundColor: Colors.blue,
+                          ),
                         ),
                       ),
                     ],
